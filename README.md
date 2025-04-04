@@ -22,6 +22,51 @@ This is a **React-based weather application** that provides real-time weather up
 
 ---
 
+## Folder Structure (Recommended)
+weather-app/
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+├── src/
+│   ├── components/
+│   │   ├── Header/
+│   │   │   ├── Header.jsx
+│   │   │   └── Header.css
+│   │   ├── WeatherCard/
+│   │   │   ├── WeatherCard.jsx
+│   │   │   └── WeatherCard.css
+│   │   ├── WeatherList/
+│   │   │   ├── WeatherList.jsx
+│   │   │   └── WeatherList.css
+│   │   ├── SearchBar/
+│   │   │   ├── SearchBar.jsx
+│   │   │   └── SearchBar.css
+│   │   ├── Footer/
+│   │   │   ├── Footer.jsx
+│   │   │   └── Footer.css
+│   │   └── Loader/
+│   │       ├── Loader.jsx
+│   │       └── Loader.css
+│   ├── services/
+│   │   └── weatherService.js
+│   ├── App.js
+│   ├── App.css
+│   ├── index.js
+│   └── index.css
+├── package.json
+├── README.md
+└── .gitignore
+
+- **WeatherCard** 
+- Acts as a presentational component that displays weather data for a single day
+- Creates a visually consistent card layout for each day's forecast
+
+- **WeatherList Component** 
+- Acts as a container component that manages multiple WeatherCards
+- Orchestrates the display of the entire forecast collection
+
+---
+
 ## Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

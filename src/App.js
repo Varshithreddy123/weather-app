@@ -1,23 +1,67 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Header from './components/Header/Header';
+import SearchBar from "./SearchBar/SearchBar";
+import WeatherList from './WeatherList/WeatherList';
+import Footer from './Footer/Footer';
+import { getWeatherForecast } from "./services/weatherService";
 import './App.css';
 
 function App() {
+  const [weatherData, setWeatherData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [lastSearchedCity, setLastSearchedCity] = useState('');
+
+  const handleSearch = async (city) => {
+    if (!city.trim()) {
+      setError('Please enter a city name');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+    setLastSearchedCity(city);
+    
+    try {
+      const data = await getWeatherForecast(city);
+      setWeatherData(data);
+    } catch (err) {
+      setError(err.message || 'Failed to fetch weather data. Please try again.');
+      setWeatherData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRetry = () => {
+    if (lastSearchedCity) {
+      handleSearch(lastSearchedCity);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <div className="container">
+        <SearchBar onSearch={handleSearch} />
+        {error && (
+          <div className="error-message">
+            {error}
+            {lastSearchedCity && (
+              <button onClick={handleRetry} className="retry-button">
+                Retry
+              </button>
+            )}
+          </div>
+        )}
+        <WeatherList 
+          weatherData={weatherData} 
+          loading={loading} 
+          error={error}
+          location={weatherData?.location} 
+        />
+      </div>
+      <Footer />
     </div>
   );
 }

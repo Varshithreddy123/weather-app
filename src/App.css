@@ -1,38 +1,128 @@
-.App {
-  text-align: center;
-}
+/* App.css - Complete Styles for Weather Application */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Base Styles */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  
+  /* App Container */
+  .App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
-  to {
-    transform: rotate(360deg);
+  
+  /* Main Content Container */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
   }
-}
+  
+  /* Error Handling Styles */
+  .error-message {
+    color: #d32f2f;
+    background: #ffebee;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin: 20px auto;
+    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+  }
+  
+  .retry-button {
+    background: #d32f2f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    margin-left: 15px;
+  }
+  
+  .retry-button:hover {
+    background: #b71c1c;
+  }
+  
+  /* Loading State */
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 15px;
+    }
+    
+    .error-message {
+      flex-direction: column;
+      text-align: center;
+      padding: 15px;
+    }
+    
+    .retry-button {
+      margin: 10px 0 0 0;
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      padding: 10px;
+    }
+  }
+  
+  /* Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Apply animation to weather cards */
+  .weather-card {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  /* Smooth transitions for interactive elements */
+  button, input {
+    transition: all 0.3s ease;
+  }
+  
+  /* Accessibility Focus Styles */
+  button:focus, input:focus {
+    outline: 2px solid #4b6cb7;
+    outline-offset: 2px;
+  }
+  
+  /* Print Styles */
+  @media print {
+    .App {
+      background: none;
+    }
+    
+    .header, .footer {
+      display: none;
+    }
+    
+    .weather-card {
+      break-inside: avoid;
+      box-shadow: none;
+      border: 1px solid #ddd;
+    }
+  }
